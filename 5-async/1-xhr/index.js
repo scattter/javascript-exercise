@@ -2,7 +2,17 @@ function fetchData(url, successCallback, errorCallback) {
   const xhr = new XMLHttpRequest();
   // <-- start
   // TODO 21: 通过XMLHttpRequest实现异步请求
-
+  xhr.open('GET', url, true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        successCallback(xhr.response);
+      } else {
+        errorCallback(xhr.response);
+      }
+    }
+  };
+  xhr.send();
   // end -->
 }
 
